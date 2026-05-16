@@ -56,8 +56,28 @@
   .nav-cta {
     background: linear-gradient(135deg, var(--gold), var(--gold-light));
     color: var(--navy) !important;
-    padding: 10px 24px; border-radius: 2px;
+    padding: 10px 24px; border-radius: 50px;
     font-weight: 600 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(240, 165, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+  .nav-cta:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(240, 165, 0, 0.5);
+  }
+  .nav-cta.whatsapp {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    margin-left: 8px;
+  }
+  .nav-cta.whatsapp:hover {
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
   }
 
   /* ── HERO ── */
@@ -95,19 +115,45 @@
   .hero-eyebrow::before {
     content: ''; width: 40px; height: 1px; background: var(--cyan);
   }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: block;
+    animation: fadeInDown 1s ease-out;
+  }
   .hero h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(3rem, 6vw, 5.5rem);
     font-weight: 900;
     color: white;
     line-height: 1.05;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   .hero h1 em {
     color: var(--gold);
     font-style: italic;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1em;
+  }
+  .expertise-ribbon {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+  .expertise-ribbon span:not(:last-child)::after {
+    content: '|';
+    margin-left: 20px;
+    color: var(--cyan);
+    opacity: 0.5;
   }
   .hero-sub {
     font-size: 1.1rem; color: rgba(255,255,255,0.6);
@@ -158,17 +204,8 @@
   }
   .hero-img-card:hover img { transform: scale(1.05); filter: brightness(0.85) saturate(1); }
   .hero-img-card:first-child { grid-row: span 2; }
-  .hero-stats {
-    position: absolute; bottom: 40px; left: 60px; right: 60%;
-    display: flex; gap: 40px; z-index: 2;
-  }
-  .stat { color: white; }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem; font-weight: 900;
-    color: var(--gold); line-height: 1;
-  }
-  .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 1px; margin-top: 4px; }
+
+
 
   /* ── SERVICES ── */
   .services {
@@ -394,30 +431,7 @@
   }
   .proj-card:hover .proj-arrow { opacity: 1; transform: translateY(0); }
 
-  /* ── TESTIMONIAL ── */
-  .testimonial {
-    background: var(--navy);
-    padding: 100px 60px;
-    text-align: center; position: relative; overflow: hidden;
-  }
-  .testimonial::before {
-    content: '"';
-    position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
-    font-family: 'Playfair Display', serif;
-    font-size: 20rem; color: rgba(33,150,211,0.04);
-    line-height: 1; pointer-events: none;
-  }
-  .testimonial blockquote {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
-    font-style: italic; color: rgba(255,255,255,0.9);
-    max-width: 800px; margin: 0 auto 32px;
-    line-height: 1.7; position: relative; z-index: 1;
-  }
-  .testimonial cite {
-    color: var(--gold); font-style: normal;
-    font-size: 0.85rem; letter-spacing: 2px; font-weight: 600; text-transform: uppercase;
-  }
+
 
   /* ── CONTACT ── */
   .contact {
@@ -425,17 +439,16 @@
     background: white;
   }
   .contact-inner {
-    max-width: 1300px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    max-width: 800px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
   }
   .contact-info {}
-  .contact-info .section-title { text-align: left; }
-  .contact-info .section-line { margin-left: 0; }
+  .contact-info .section-line { margin: 20px auto 0; }
   .contact-info p {
     color: var(--gray); font-size: 1rem; line-height: 1.9;
     margin: 24px 0 40px; font-weight: 300;
   }
-  .contact-items { display: flex; flex-direction: column; gap: 20px; }
+  .contact-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; }
   .contact-item {
     display: flex; gap: 16px; align-items: center;
     padding: 20px 24px;
@@ -452,38 +465,7 @@
   .contact-item h4 { font-size: 0.75rem; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; font-weight: 500; }
   .contact-item p { font-size: 1rem; color: var(--navy); font-weight: 600; margin: 0; }
 
-  .contact-form { background: var(--off-white); padding: 48px; }
-  .form-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem; font-weight: 700; color: var(--navy); margin-bottom: 32px;
-  }
-  .form-group { margin-bottom: 20px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-group label {
-    display: block; font-size: 0.75rem; letter-spacing: 2px;
-    text-transform: uppercase; font-weight: 600; color: var(--gray); margin-bottom: 8px;
-  }
-  .form-group input, .form-group select, .form-group textarea {
-    width: 100%; padding: 14px 18px;
-    border: 1px solid var(--light-gray);
-    background: white; color: var(--navy);
-    font-family: 'Outfit', sans-serif; font-size: 0.9rem;
-    outline: none; transition: border-color 0.3s;
-    appearance: none;
-  }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    border-color: var(--cyan);
-  }
-  .form-group textarea { resize: vertical; min-height: 110px; }
-  .form-submit {
-    width: 100%; padding: 16px;
-    background: linear-gradient(135deg, var(--navy), var(--blue));
-    color: white; border: none; cursor: pointer;
-    font-family: 'Outfit', sans-serif; font-size: 0.9rem;
-    font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-    transition: all 0.3s; margin-top: 8px;
-  }
-  .form-submit:hover { background: linear-gradient(135deg, var(--blue), var(--cyan)); transform: translateY(-2px); }
+
 
   /* ── FOOTER ── */
   footer {
@@ -501,6 +483,11 @@
   .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
   .footer-links a:hover { color: var(--gold); }
   .footer-copy { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+
+  /* Floating mobile bar at the end */
+  .floating-contact-bar {
+    /* (Styles moved to CSS section above for consistency) */
+  }
 
   /* ── SCROLL ANIMATIONS ── */
   .fade-up {
@@ -540,6 +527,49 @@
     .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
     .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
   }
+
+  /* ── FLOATING CONTACT BAR ── */
+  .floating-contact-bar {
+    display: none; position: fixed; bottom: 30px; right: 20px; z-index: 9999;
+    flex-direction: column; gap: 15px;
+    animation: slideUpFAB 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .floating-btn {
+    width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; font-size: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+  }
+  .floating-btn:hover { transform: scale(1.1) translateY(-5px); }
+  .floating-btn:active { transform: scale(0.9); }
+  
+  .floating-btn.call { background: var(--navy); color: white; border: 2px solid rgba(255,255,255,0.1); }
+  .floating-btn.wa { background: #25D366; color: white; }
+
+  @keyframes slideUpFAB {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translate(-50%, 40px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
+
+  @media (max-width: 900px) {
+    .floating-contact-bar { display: flex; }
+    nav .nav-cta { display: none; } /* Hide nav cta on mobile to save space */
+  }
 </style>
 </head>
 <body>
@@ -554,7 +584,8 @@
     <a href="#projects">Projects</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
-    <a href="tel:9900015902" class="nav-cta">📞 Call Now</a><a href="https://wa.me/919900015902" class="nav-cta" style="background:linear-gradient(135deg,#25D366,#128C7E);margin-left:8px;">💬 WhatsApp</a>
+    <a href="tel:9900015902" class="nav-cta">📞 9900015902</a>
+    <a href="https://wa.me/919900015902" class="nav-cta whatsapp">💬 WhatsApp</a>
   </div>
 </nav>
 
@@ -564,8 +595,14 @@
   <div class="hero-grid"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Bengaluru, India</div>
+    <div class="hero-tagline">Dream. Design. Deliver.</div>
     <h1>Building<br><em>Dreams</em><br>Into Reality</h1>
-    <p class="hero-sub">From concept to completion — we craft exceptional residential & commercial spaces that stand the test of time. Architecture. Construction. Interiors. Lighting.</p>
+    <div class="expertise-ribbon">
+      <span>Architect</span>
+      <span>Construct</span>
+      <span>Interior</span>
+    </div>
+    <p class="hero-sub">From concept to completion — we craft exceptional residential & commercial spaces that stand the test of time.</p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Start Your Project</a>
       <a href="#projects" class="btn-outline">View Portfolio</a>
@@ -584,20 +621,7 @@
       </div>
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">200+</div>
-      <div class="stat-label">Projects Done</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">12+</div>
-      <div class="stat-label">Years Exp.</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">98%</div>
-      <div class="stat-label">Happy Clients</div>
-    </div>
-  </div>
+
 </section>
 
 <!-- SERVICES -->
@@ -828,13 +852,7 @@
   </div>
 </section>
 
-<!-- TESTIMONIAL -->
-<section class="testimonial">
-  <blockquote>
-    "Vinisha Ventures transformed our empty plot into the home we always dreamed of. Their attention to detail, quality of construction and design expertise exceeded all our expectations."
-  </blockquote>
-  <cite>— Rajesh Kumar, Homeowner · Bengaluru</cite>
-</section>
+
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
@@ -856,53 +874,13 @@
           <div class="contact-item-icon">📧</div>
           <div>
             <h4>Email</h4>
-            <p>sales@edisonamp.in</p>
+            <p><a href="mailto:sales@edisonamp.in" style="color:var(--navy);text-decoration:none;font-weight:700;">sales@edisonamp.in</a></p>
           </div>
         </div>
-        <div class="contact-item">
-          <div class="contact-item-icon">📍</div>
-          <div>
-            <h4>Location</h4>
-            <p>Bengaluru, Karnataka, India</p>
-          </div>
-        </div>
+
       </div>
     </div>
-    <div class="contact-form fade-up">
-      <div class="form-title">Request a Free Consultation</div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" placeholder="Rajesh Kumar">
-        </div>
-        <div class="form-group">
-          <label>Phone Number</label>
-          <input type="tel" placeholder="+91 98765 43210">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" placeholder="your@email.com">
-      </div>
-      <div class="form-group">
-        <label>Service Required</label>
-        <select>
-          <option value="">Select a service...</option>
-          <option>Architecture & Design</option>
-          <option>Construction</option>
-          <option>Interior Design</option>
-          <option>LED Lighting (Edison Amp)</option>
-          <option>HVLS Fans</option>
-          <option>HT & LT Electrical Works</option>
-          <option>Complete Package</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Project Details</label>
-        <textarea placeholder="Tell us about your project — type, size, location, budget..."></textarea>
-      </div>
-      <button class="form-submit">Send Enquiry →</button>
-    </div>
+
   </div>
 </section>
 
@@ -917,11 +895,20 @@
       <a href="#services">Services</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
+      <a href="tel:9900015902">Call Us: 9900015902</a>
       <a href="mailto:sales@edisonamp.in">Email Us</a>
     </div>
     <div class="footer-copy">© 2026 Vinisha Ventures. All rights reserved.</div>
   </div>
-</footer>
+<!-- FLOATING CONTACT BUTTONS (MOBILE ONLY) -->
+<div class="floating-contact-bar">
+  <a href="https://wa.me/919900015902" class="floating-btn wa" data-label="WhatsApp">
+    <span>💬</span>
+  </a>
+  <a href="tel:9900015902" class="floating-btn call" data-label="Call Now">
+    <span>📞</span>
+  </a>
+</div>
 
 <script>
   // Scroll animations
@@ -941,11 +928,6 @@
     nav.style.background = window.scrollY > 60
       ? 'rgba(6,15,30,0.98)'
       : 'rgba(10,22,40,0.92)';
-  });
-
-  // Form submit
-  document.querySelector('.form-submit').addEventListener('click', () => {
-    alert('Thank you! We will contact you shortly. You can also reach us directly at 9900015902.');
   });
 </script>
 </body>
