@@ -918,7 +918,8 @@
       padding-bottom: 30px !important;
     }
     .hero-bg {
-      background-position: 72% center !important; /* Shifts the focal architectural element into frame on mobile viewports */
+      background-size: 140% auto !important; /* Restricts vertical zoom, keeping image crisp and compact */
+      background-position: center top !important; /* Perfectly centers and aligns the top architectural detail */
     }
     .hero-corner-logo { display: none !important; }
     .hero-content { padding: 40px 24px 20px; }
@@ -990,10 +991,11 @@
     .footer-right { text-align: center; align-items: center; }
     .footer-credit {
       text-align: center !important;
-      line-height: 1.6 !important;
-      font-size: 0.68rem !important;
-      letter-spacing: 0.2px !important;
-      opacity: 0.8 !important;
+      line-height: 1.2 !important;
+      font-size: 0.58rem !important;
+      letter-spacing: -0.1px !important;
+      opacity: 0.85 !important;
+      white-space: nowrap !important;
     }
   }
 
