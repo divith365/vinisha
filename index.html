@@ -775,26 +775,122 @@
     width: 100%;
   }
   .pre-footer-inner {
-    max-width: 1200px; 
+    max-width: 1240px; 
     margin: 0 auto; 
-    padding: 0 40px; 
+    padding: 0 30px; 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    flex-wrap: wrap; 
-    gap: 30px;
+    flex-wrap: wrap; /* Allows wrapping on intermediate screens to prevent any overlap! */
+    gap: 50px;
   }
   .pre-footer-left {
     text-align: left; 
-    flex: 1 1 350px;
+    flex: 0 0 auto; /* Keeps heading size compact and stable */
+    cursor: default;
   }
+  .pre-footer-tag {
+    color: var(--cyan); 
+    font-size: 0.7rem; 
+    letter-spacing: 3px; 
+    text-transform: uppercase; 
+    margin-bottom: 6px; 
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pre-footer-left:hover .pre-footer-tag {
+    letter-spacing: 4.5px;
+    color: var(--cyan-light);
+  }
+  .pre-footer-title {
+    font-family: 'DM Serif Display', serif; 
+    font-size: 1.8rem; 
+    line-height: 1.2; 
+    color: white; 
+    margin: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pre-footer-title em {
+    color: var(--gold);
+    font-style: italic;
+    transition: all 0.4s ease;
+  }
+  .pre-footer-left:hover .pre-footer-title {
+    transform: translateY(-2px);
+  }
+  .pre-footer-left:hover .pre-footer-title em {
+    color: var(--cyan);
+  }
+  
   .pre-footer-right {
     display: flex; 
-    gap: 40px; 
+    gap: 20px; /* Tight gap to group contact details closely next to the logos on the far right */
     align-items: center; 
-    flex-wrap: wrap; 
-    flex: 1 1 auto; 
+    flex-wrap: nowrap; /* Keeps contact cards strictly in one horizontal line */
+    flex: 0 0 auto; 
+    margin-left: auto; /* Pushes contact details completely to the right edge */
     justify-content: flex-end;
+  }
+  .pre-footer-card {
+    display: flex; 
+    align-items: center; 
+    gap: 12px;
+    flex-shrink: 0; /* Prevents any card from being squeezed or shrunk by the browser! */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .pre-footer-card.location-card {
+    max-width: 580px;
+  }
+  .pre-footer-icon {
+    font-size: 1.2rem;
+    display: inline-block;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .pre-footer-icon.gold-icon { color: var(--gold); }
+  .pre-footer-icon.cyan-icon { color: var(--cyan); }
+  
+  .pre-footer-card:hover .pre-footer-icon {
+    transform: scale(1.2) rotate(12deg);
+  }
+  
+  .pre-footer-card-info {
+    font-size: 0.8rem; 
+    line-height: 1.4;
+  }
+  .pre-footer-label {
+    color: rgba(255,255,255,0.5); 
+    font-weight: 500; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+  .pre-footer-card:hover .pre-footer-label {
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1.5px;
+  }
+  
+  .pre-footer-value {
+    font-weight: 600;
+  }
+  .pre-footer-value a {
+    color: white; 
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .pre-footer-value a:hover {
+    color: var(--cyan);
+  }
+  .pre-footer-value a.wa-chat-link {
+    color: #25D366;
+  }
+  .pre-footer-value a.wa-chat-link:hover {
+    color: #4df38a;
+  }
+  .pre-footer-value a.address-link {
+    color: rgba(255,255,255,0.8);
+  }
+  .pre-footer-value a.address-link:hover {
+    color: var(--cyan);
   }
 
   /* ── FOOTER ── */
@@ -897,12 +993,7 @@
   .footer-credit a:hover {
     color: var(--gold);
   }
-  @media (max-width: 900px) {
-    .footer-right {
-      text-align: center;
-      align-items: center;
-    }
-  }
+
 
   /* Floating mobile bar at the end */
   .floating-contact-bar {
@@ -993,13 +1084,14 @@
     .contact-info .section-line { margin: 20px auto 0; }
     .contact-item { transform: none !important; }
     .contact-form { padding: 32px 24px; }
-    
+  }
+  @media (max-width: 1400px) {
     .pre-footer-inner {
       padding: 0 24px !important;
       flex-direction: column !important;
       align-items: flex-start !important;
       text-align: left !important;
-      gap: 20px !important;
+      gap: 30px !important;
     }
     .pre-footer-left {
       flex: 1 1 auto !important;
@@ -1011,6 +1103,11 @@
       justify-content: flex-start !important;
       width: 100% !important;
       gap: 20px !important;
+      margin-left: 0 !important;
+    }
+    .pre-footer-card-info {
+      flex-wrap: wrap !important;
+      justify-content: flex-start !important;
     }
 
     footer { padding: 25px 24px !important; }
@@ -1025,9 +1122,9 @@
     .footer-credit {
       text-align: center !important;
       line-height: 1.2 !important;
-      font-size: 0.58rem !important;
-      letter-spacing: -0.1px !important;
-      opacity: 0.85 !important;
+      font-size: 0.46rem !important;
+      letter-spacing: -0.2px !important;
+      opacity: 0.7 !important;
       white-space: nowrap !important;
     }
   }
@@ -1474,34 +1571,53 @@
   <div class="pre-footer-inner">
     <!-- Small Typography Left Column -->
     <div class="pre-footer-left">
-      <div class="section-tag" style="color: var(--cyan); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; font-weight: 600;">Get In Touch</div>
-      <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.8rem; line-height: 1.2; color: white; margin: 0;">
+      <div class="pre-footer-tag">Get In Touch</div>
+      <h3 class="pre-footer-title">
         Let's Build <em>Something Great</em>
       </h3>
     </div>
     
     <!-- Ultra Small Contact Links Right Column -->
-    <div class="pre-footer-right">
-      <!-- Compact Phone & WA Link -->
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <span style="color: var(--gold); font-size: 1.2rem;">📞</span>
-        <div style="font-size: 0.8rem; line-height: 1.4;">
-          <div style="color: rgba(255,255,255,0.5); font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Phone & Watsapp</div>
-          <div style="font-weight: 600;">
-            <a href="tel:9901483873" style="color: white; text-decoration: none;">+91 99014 83873</a> &nbsp;|&nbsp; 
-            <a href="https://wa.me/919901483873" target="_blank" style="color: #25D366; text-decoration: none;">💬 Chat</a>
-          </div>
-        </div>
-      </div>
+    <div class="pre-footer-right" style="display: flex; justify-content: flex-end; flex: 0 0 auto; margin-left: auto;">
+      <!-- Compact Location & Unified Contact Card -->
+      <div class="pre-footer-card location-card" style="align-items: flex-start; max-width: 620px; width: 100%; display: flex; gap: 12px; justify-content: flex-end;">
+        <span class="pre-footer-icon gold-icon" style="margin-top: 4px;">📍</span>
+        <div class="pre-footer-card-info" style="display: flex; align-items: flex-start; justify-content: flex-end; gap: 20px; flex-wrap: wrap; width: 100%;">
+          
+          <!-- Column 1: Address, Phone, and Email stacked vertically -->
+          <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start; max-width: 320px; flex-shrink: 0; text-align: left;">
+            <!-- Address Link -->
+            <div class="pre-footer-value font-semibold">
+              <a href="https://www.google.com/maps/search/?api=1&query=Vinisha+Ventures+Shree+Gruha+Kalikambhadevi+Road+Ajjampura+Chikkamagaluru+Karnataka+577547" target="_blank" class="address-link">
+                Vinisha Ventures, #6, Ground Floor, Shree Gruha, Ramakrishna Badavane, Kalikambhadevi Road, KEB Back side, Ajjampura, Chikkamagaluru District, Karnataka - 577547
+              </a>
+            </div>
+            
+            <!-- Phone & WA Link stacked below address -->
+            <div class="pre-footer-card" style="gap: 8px;">
+              <span style="font-size: 0.95rem;">📞</span>
+              <div class="pre-footer-value" style="font-size: 0.85rem;">
+                <a href="tel:9901483873">+91 99014 83873</a> &nbsp;|&nbsp; 
+                <a href="https://wa.me/919901483873" target="_blank" class="wa-chat-link">💬 Chat</a>
+              </div>
+            </div>
 
-      <!-- Compact Email Link -->
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <span style="color: var(--cyan); font-size: 1.2rem;">📧</span>
-        <div style="font-size: 0.8rem; line-height: 1.4;">
-          <div style="color: rgba(255,255,255,0.5); font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Email Inquiry</div>
-          <div style="font-weight: 600;">
-            <a href="mailto:sales@edisonamp.in" style="color: white; text-decoration: none;">sales@edisonamp.in</a>
+            <!-- Email Link stacked below address -->
+            <div class="pre-footer-card" style="gap: 8px;">
+              <span style="font-size: 0.95rem;">📧</span>
+              <div class="pre-footer-value" style="font-size: 0.85rem;">
+                <a href="mailto:sales@edisonamp.in">sales@edisonamp.in</a>
+              </div>
+            </div>
           </div>
+
+          <!-- Column 2: Sister Concern Affiliation Badge next to the contact column -->
+          <div class="sister-concern-badge" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; padding: 12px 14px; background: rgba(255,255,255,0.02); border: 1.5px solid rgba(255,255,255,0.06); width: 240px; flex-shrink: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); cursor: default; margin-top: 4px;" onmouseover="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='var(--gold)'; this.style.transform='translateY(-3px) scale(1.04)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.4)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.06)'; this.style.transform='none'; this.style.boxShadow='none';">
+            <img src="logo.png" alt="Vinisha Ventures" style="height: 43px; width: auto; object-fit: contain; filter: brightness(1.1); max-width: 100%;">
+            <span style="font-size: 0.65rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 700; line-height: 1;">A Sister Concern Of</span>
+            <img src="edison.png" alt="Edison" style="height: 53px; width: auto; object-fit: contain; filter: brightness(1.1); max-width: 100%;">
+          </div>
+          
         </div>
       </div>
     </div>
@@ -1513,8 +1629,8 @@
   <!-- Footer Bottom -->
   <div class="footer-bottom" style="border-top: none; padding-top: 0; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
     <div class="footer-copy" style="color: rgba(255,255,255,0.6); font-size: 0.8rem;">© 2026 Vinisha Ventures. All rights reserved.</div>
-    <div class="footer-credit" style="color: rgba(255,255,255,0.65); font-size: 0.8rem;">
-      ✦ by <a href="https://trustwork.co.in" target="_blank" style="color: var(--cyan); text-decoration: none; font-weight: 600;">trustwork.co.in</a> &nbsp;|&nbsp; 📞 +91 93530 10107 &nbsp;|&nbsp; 📧 support@trustwork.co.in
+    <div class="footer-credit" style="color: rgba(255,255,255,0.4); font-size: 0.65rem; letter-spacing: 0.5px;">
+      ✦ by <a href="https://trustwork.co.in" target="_blank" style="color: rgba(255,255,255,0.6); text-decoration: none; font-weight: 600;">trustwork.co.in</a> &nbsp;|&nbsp; 📞 +91 93530 10107 &nbsp;|&nbsp; 📧 support@trustwork.co.in
     </div>
   </div>
 </footer>
